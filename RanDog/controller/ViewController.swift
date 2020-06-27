@@ -14,8 +14,8 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     
     //func to get breed list
     func getBreedList(){
-        let allBreedaUrl = DogAPI.EndPoint.AllBreedList.url
-        let task = URLSession.shared.dataTask(with: allBreedaUrl) { (data, response, error) in
+        let allBreedUrl = DogAPI.EndPoint.AllBreedList.url
+        let task = URLSession.shared.dataTask(with: allBreedUrl) { (data, response, error) in
             guard let data = data else {return}
             let decoder = JSONDecoder()
             let breedListDictionary = try! decoder.decode(BreedListResponse.self, from: data)
@@ -29,6 +29,44 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
         task.resume()
         
     }
+    
+    
+    
+    @IBAction func fetchForBreed(_ sender: Any) {
+        
+        let randomIMageEndPoint = DogAPI.EndPoint.ImageForBreed(breeds[pickerView.selectedRow(inComponent: 0)]).url
+        
+        let task = URLSession.shared.dataTask(with: randomIMageEndPoint) { (data, response, error) in
+            guard let data = data else{
+                return
+            }
+            let imageData = try! JSONDecoder().decode(DogImage.self, from: data)
+            
+            guard let imageUrl = URL(string: (imageData.message ))  else {return}
+                              let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                                  guard let data = data else {return}
+                                 let dogImage =  UIImage(data: data)
+                                  DispatchQueue.main.async {
+                                      self.imageView.image = dogImage
+                                  }
+                              }
+                              task.resume()
+                          }
+                          task.resume()
+            }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+   
+    
+    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -63,7 +101,6 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
                        }
                    }
                    task.resume()
-                   
                }
                task.resume()
     }
