@@ -7,11 +7,34 @@
 //
 
 import UIKit
+import AVKit
 
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
     var breeds : [String] = []
     
+       override func viewDidLoad() {
+           super.viewDidLoad()
+           pickerView.delegate = self
+           pickerView.dataSource = self
+           
+           getBreedList()
+           
+       }
+    override func viewDidAppear(_ animated: Bool) {
+        playVideo()
+    }
+    func  playVideo(){
+           let url = Bundle.main.url(forResource: "randog", withExtension: "mp4")
+           print("hhhhhhhhhhhhhhhh  \(url?.absoluteString)")
+          let  player = AVPlayer(url: url!)
+           let vc = AVPlayerViewController()
+           vc.player = player
+           present(vc, animated: true) {
+               vc.player?.play()
+           }
+        
+       }
     //func to get breed list
     func getBreedList(){
         let allBreedUrl = DogAPI.EndPoint.AllBreedList.url
@@ -98,15 +121,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
-        getBreedList()
-        
-    }
+   
     
     @IBOutlet weak var imageView: UIImageView!
     
