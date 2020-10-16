@@ -24,7 +24,8 @@ enum EndPoint  {
             return "https://dog.ceo/api/breeds/image/random"
         case .ImageForBreed (let breed) :
             return "https://dog.ceo/api/breed/\(breed)/images/random"
-        case .AllBreedList : return "https://dog.ceo/api/breeds/list/all"
+        case .AllBreedList :
+            return "https://dog.ceo/api/breeds/list/all"
         }
      }
    }

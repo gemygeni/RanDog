@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
     
-   var breeds : [String] = []
+    var breeds : [String] = []
     
     //func to get breed list
     func getBreedList(){
@@ -19,7 +19,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
             guard let data = data else {return}
             let decoder = JSONDecoder()
             let breedListDictionary = try! decoder.decode(BreedListResponse.self, from: data)
-             let breedList = breedListDictionary.message.keys.map({$0})
+            let breedList = breedListDictionary.message.keys.map({$0})
             self.breeds = breedList
             DispatchQueue.main.async {
                 self.pickerView.reloadAllComponents()
@@ -32,7 +32,7 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     
     
     
-    @IBAction func fetchForBreed(_ sender: Any) {
+    @IBAction func fetchForBreed(_ sender: Any? = nil) {
         
         let randomIMageEndPoint = DogAPI.EndPoint.ImageForBreed(breeds[pickerView.selectedRow(inComponent: 0)]).url
         
@@ -43,28 +43,17 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
             let imageData = try! JSONDecoder().decode(DogImage.self, from: data)
             
             guard let imageUrl = URL(string: (imageData.message ))  else {return}
-                              let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                                  guard let data = data else {return}
-                                 let dogImage =  UIImage(data: data)
-                                  DispatchQueue.main.async {
-                                      self.imageView.image = dogImage
-                                  }
-                              }
-                              task.resume()
-                          }
-                          task.resume()
+            let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                guard let data = data else {return}
+                let dogImage =  UIImage(data: data)
+                DispatchQueue.main.async {
+                    self.imageView.image = dogImage
+                }
             }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-   
+            task.resume()
+        }
+        task.resume()
+    }
     
     
     
@@ -79,43 +68,46 @@ class ViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSour
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return breeds[row]
     }
-
+    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-         
+        
         let randomImageEndpoint = DogAPI.EndPoint.ImageForBreed(breeds[row]).url
-               let task = URLSession.shared.dataTask(with: randomImageEndpoint) { (data, response, error) in
-                   guard let data = data
-                       else{
-                           return
-                   }
-                   let decoder = JSONDecoder()
-                   let imageData = try! decoder.decode(DogImage.self, from: data)
-               
-                guard let imageUrl = URL(string: (imageData.message ))  else {return}
-                   let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
-                       guard let data = data else {return}
-                      let dogImage =  UIImage(data: data)
-                       DispatchQueue.main.async {
-                           self.imageView.image = dogImage
-                       }
-                   }
-                   task.resume()
-               }
-               task.resume()
+        let task = URLSession.shared.dataTask(with: randomImageEndpoint) { (data, response, error) in
+            guard let data = data
+                else{
+                    return
+            }
+            let decoder = JSONDecoder()
+            let imageData = try! decoder.decode(DogImage.self, from: data)
+            
+            guard let imageUrl = URL(string: (imageData.message ))  else {return}
+            let task = URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                guard let data = data else {return}
+                let dogImage =  UIImage(data: data)
+                DispatchQueue.main.async {
+                    self.imageView.image = dogImage
+                }
+            }
+            task.resume()
+        }
+        task.resume()
     }
     
     
     
     @IBOutlet weak var pickerView: UIPickerView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerView.delegate = self
         pickerView.dataSource = self
-       getBreedList()
+        
+        getBreedList()
         
     }
-
+    
     @IBOutlet weak var imageView: UIImageView!
     
 }

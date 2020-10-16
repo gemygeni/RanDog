@@ -30,6 +30,11 @@
 		EF0F3FAF23F2428800521175 /* DogAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAPI.swift; sourceTree = "<group>"; };
 		EF0F3FB123F24CE400521175 /* DogImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogImage.swift; sourceTree = "<group>"; };
 		EF3F631B23F514130023D3BF /* BreedListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreedListResponse.swift; sourceTree = "<group>"; };
+		EF6BB2BF24C73AC3006B9BF0 /* ar-EG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ar-EG"; path = "ar-EG.lproj/Main.strings"; sourceTree = "<group>"; };
+		EF6BB2C024C73AC3006B9BF0 /* ar-EG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ar-EG"; path = "ar-EG.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		EF6BB2C124C7F177006B9BF0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		EF6BB2C224C7F177006B9BF0 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		EFDB0BAF24DA221A00306BFB /* randog.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = randog.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,7 @@
 			children = (
 				EF0F3F9E23F2277C00521175 /* Main.storyboard */,
 				EF0F3FA123F2277E00521175 /* Assets.xcassets */,
+				EFDB0BAF24DA221A00306BFB /* randog.mp4 */,
 				EF0F3FA323F2277E00521175 /* LaunchScreen.storyboard */,
 			);
 			path = view;
@@ -142,6 +148,8 @@
 			knownRegions = (
 				en,
 				Base,
+				"ar-EG",
+				ja,
 			);
 			mainGroup = EF0F3F8C23F2277C00521175;
 			productRefGroup = EF0F3F9623F2277C00521175 /* Products */;
@@ -187,6 +195,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				EF0F3F9F23F2277C00521175 /* Base */,
+				EF6BB2BF24C73AC3006B9BF0 /* ar-EG */,
+				EF6BB2C124C7F177006B9BF0 /* ja */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -195,6 +205,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				EF0F3FA423F2277E00521175 /* Base */,
+				EF6BB2C024C73AC3006B9BF0 /* ar-EG */,
+				EF6BB2C224C7F177006B9BF0 /* ja */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -206,6 +218,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -266,6 +279,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
